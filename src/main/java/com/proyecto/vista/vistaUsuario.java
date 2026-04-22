@@ -29,9 +29,25 @@ public class vistaUsuario {
         System.out.println("Ingrese una contraseña:");
         String contraseña = scanner.nextLine();
 
-        
         controladorUsuario ctrl = new controladorUsuario();
         ctrl.registrarUsuario(nombre, apellido, correo, numeroCedula, telefono, usuario, contraseña);
         System.out.println("Usuario registrado exitosamente.");
     }
+
+    public void inicioSesion() {
+        System.out.print("Usuario: ");
+        String usuario = scanner.nextLine();
+        System.out.print("Contraseña: ");
+        String contraseña = scanner.nextLine();
+
+        controladorUsuario ctrl = new controladorUsuario();
+        if (ctrl.iniciarSesion(usuario, contraseña)) {
+            System.out.println("Inicio de sesión exitoso. Bienvenido " + usuario);
+            // aquí puedes mostrar el menú principal
+        } else {
+            System.out.println("Usuario o contraseña incorrectos.");
+        }
+
+    }
+
 }
