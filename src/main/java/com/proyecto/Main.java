@@ -5,7 +5,8 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 import com.proyecto.config.ConexionMySQLDatabase;
-import com.proyecto.controlador.controladorUsuario;
+import com.proyecto.controlador.controladorEvento;
+import com.proyecto.vista.vistaEvento;
 import com.proyecto.vista.vistaUsuario;
 
 public class Main {
@@ -33,5 +34,12 @@ public class Main {
         // vista.registrarUsuario();
 
         vista.inicioSesion();
+
+        vistaEvento vistaEvento = new vistaEvento();
+        vistaEvento.FormularioRegistroEvento();
+
+        
+
+
     }
 }
