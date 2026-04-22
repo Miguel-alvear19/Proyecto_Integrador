@@ -15,4 +15,9 @@ public class controladorUsuario {
         Registrarse nuevoUsuario = new Registrarse(nombre, apellido, correo, numeroCedula, telefono, usuario, contraseña);
         usuarioDao.insertarUsuario(nuevoUsuario);
     }
+
+    public boolean iniciarSesion(String usuario, String contraseña) {
+    return usuarioDao.validarLogin(usuario, contraseña);
+}
+
 }
