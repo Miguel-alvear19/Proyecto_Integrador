@@ -5,4 +5,6 @@ public class IniciarSesion {
     protected String Usuario;
     protected String Contraseña;
 
+    
+
 }
