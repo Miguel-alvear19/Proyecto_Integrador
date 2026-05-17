@@ -2,11 +2,13 @@ package com.proyecto.DAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.proyecto.config.ConexionMySQLDatabase;
 import com.proyecto.modelo.RegistrarEvento;
-
 
 public class EventoDao {
     public boolean insertarEvento(RegistrarEvento evento) {
@@ -24,5 +26,28 @@ public class EventoDao {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public List<RegistrarEvento> listarEventos() {
+        List<RegistrarEvento> lista = new ArrayList<>();
+        try (Connection conn = ConexionMySQLDatabase.getConnection()) {
+            String sql = "SELECT idEvento, nombreEvento, lugarEvento, capacidadMaxima, descripcion FROM eventos";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                RegistrarEvento ev = new RegistrarEvento(
+                    rs.getString("nombreEvento"),
+                    rs.getInt("capacidadMaxima"),
+                    rs.getString("lugarEvento"),
+                    rs.getString("descripcion"),
+                    rs.getString("telefonoContacto")
+                );
+                lista.add(ev);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al listar eventos: " + e.getMessage());
+        }
+        return lista;
     }
 }
