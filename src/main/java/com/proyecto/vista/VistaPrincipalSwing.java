@@ -25,13 +25,14 @@ public class VistaPrincipalSwing extends JFrame implements ActionListener {
     private JMenuItem menuItemInfo;
     private JMenuItem menuItemConsultar;
 
+    // Vista de eventos con la tabla
     private VistaEventoSwing vistaEvento;
 
-    public VistaPrincipalSwing() {
-        initComponents();
+    public VistaPrincipalSwing(int idClienteLogueado) {
+        initComponents(idClienteLogueado);
     }
 
-    private void initComponents() {
+    private void initComponents(int idClienteLogueado) {
         setTitle("Sistema de Gestión de Eventos");
         setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -40,19 +41,17 @@ public class VistaPrincipalSwing extends JFrame implements ActionListener {
         cardLayout = new CardLayout();
         panelContenedor = new JPanel(cardLayout);
 
-        vistaEvento = new VistaEventoSwing();
-
-        // Paneles
+        // Instancias de paneles
+        vistaEvento = new VistaEventoSwing(idClienteLogueado); // ahora recibe el cliente
         JPanel panelInicio = crearPanel("Bienvenido al sistema");
-        JPanel panelEventos = crearPanel("Gestión de Eventos");
         JPanel panelInfo = crearPanel("Información del sistema");
         JPanel panelConsultar = crearPanel("Consultar Reservas");
 
+        // Agregar al contenedor
         panelContenedor.add(panelInicio, PANEL_INICIO);
-        panelContenedor.add(panelEventos, PANEL_EVENTOS);
+        panelContenedor.add(vistaEvento, PANEL_EVENTOS);
         panelContenedor.add(panelInfo, PANEL_INFO);
         panelContenedor.add(panelConsultar, PANEL_CONSULTAR);
-        panelContenedor.add(vistaEvento, PANEL_EVENTOS);
 
         configurarMenu();
 
@@ -83,7 +82,13 @@ public class VistaPrincipalSwing extends JFrame implements ActionListener {
 
         // Menú Eventos
         JMenu menuEventos = new JMenu("Eventos");
+        menuEventos.setForeground(Color.BLACK);
+        menuEventos.setFont(new Font("Segoe UI", Font.BOLD, 12));
+
         menuItemEventos = new JMenuItem("Gestión de Eventos");
+        menuItemEventos.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+        menuItemEventos.setBackground(new Color(52, 73, 94));
+        menuItemEventos.setForeground(Color.WHITE);
         menuItemEventos.addActionListener(this);
         menuEventos.add(menuItemEventos);
 
@@ -125,7 +130,8 @@ public class VistaPrincipalSwing extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new VistaPrincipalSwing().setVisible(true));
+        // Simulamos que el cliente logueado tiene idCliente = 1
+        int idClienteLogueado = 1;
+        SwingUtilities.invokeLater(() -> new VistaPrincipalSwing(idClienteLogueado).setVisible(true));
     }
 }
-

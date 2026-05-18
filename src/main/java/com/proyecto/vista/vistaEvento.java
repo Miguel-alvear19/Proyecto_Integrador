@@ -14,6 +14,7 @@ public class vistaEvento {
         Scanner sc = new Scanner(System.in);
 
         System.out.println("=== Registro de Evento ===");
+        sc.nextLine(); // limpiar buffer
         System.out.print("Nombre del evento: ");
         String nombreEvento = sc.nextLine();
         System.out.print("Capacidad máxima: ");

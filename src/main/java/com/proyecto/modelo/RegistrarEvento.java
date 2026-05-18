@@ -2,6 +2,7 @@ package com.proyecto.modelo;
 
 public class RegistrarEvento {
 
+    private int idEvento; // ID del evento
     private String nombreEvento;
     private int capacidadMaxima;
     private String lugarEvento;
@@ -16,6 +17,9 @@ public class RegistrarEvento {
         this.descripcion = descripcion;
         this.telefonoContacto = telefonoContacto2;
     }
+
+    
+
 
     public String getNombreEvento() {
         return nombreEvento;
@@ -57,6 +61,13 @@ public class RegistrarEvento {
         this.telefonoContacto = telefonoContacto;
     }
 
-    
+    public int getIdEvento() {
+        return idEvento;
+    }
+
+    public void setIdEvento(int idEvento) {
+        this.idEvento = idEvento;
+    }
+
 
 }

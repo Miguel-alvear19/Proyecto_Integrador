@@ -12,7 +12,7 @@ public class controladorEvento {
         eventoDao = new EventoDao();
     }
 
-    public void registrarEvento(String nombreEvento, int capacidadMaxima, String lugarEvento,
+    public void registrarEvento( String nombreEvento, int capacidadMaxima, String lugarEvento,
             String descripcion, String telefonoContacto) {
         RegistrarEvento evento = new RegistrarEvento(nombreEvento, capacidadMaxima, lugarEvento, descripcion, telefonoContacto);
         boolean guardado = eventoDao.insertarEvento(evento);

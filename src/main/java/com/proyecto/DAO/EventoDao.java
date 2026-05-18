@@ -31,18 +31,17 @@ public class EventoDao {
     public List<RegistrarEvento> listarEventos() {
         List<RegistrarEvento> lista = new ArrayList<>();
         try (Connection conn = ConexionMySQLDatabase.getConnection()) {
-            String sql = "SELECT idEvento, nombreEvento, lugarEvento, capacidadMaxima, descripcion FROM eventos";
+            String sql = "SELECT nombreEvento, lugarEvento, capacidadMaxima, descripcion, telefonoContacto FROM eventos";
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
                 RegistrarEvento ev = new RegistrarEvento(
-                    rs.getString("nombreEvento"),
-                    rs.getInt("capacidadMaxima"),
-                    rs.getString("lugarEvento"),
-                    rs.getString("descripcion"),
-                    rs.getString("telefonoContacto")
-                );
+                        rs.getString("nombreEvento"),
+                        rs.getInt("capacidadMaxima"),
+                        rs.getString("lugarEvento"),
+                        rs.getString("descripcion"),
+                        rs.getString("telefonoContacto"));
                 lista.add(ev);
             }
         } catch (SQLException e) {

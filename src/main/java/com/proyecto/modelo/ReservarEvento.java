@@ -3,11 +3,15 @@ package com.proyecto.modelo;
 
 public class ReservarEvento {
 
+    private int idEvento; // ID del evento
+    private int idCliente; // ID del cliente que reserva
     private String fechaReserva;
     private String horaReserva;
     private String servicio;
 
-    public ReservarEvento(String fechaReserva, String horaReserva, String servicio) {
+    public ReservarEvento(int idEvento, int idCliente, String fechaReserva, String horaReserva, String servicio) {
+        this.idEvento = idEvento;
+        this.idCliente = idCliente;
         this.fechaReserva = fechaReserva;
         this.horaReserva = horaReserva;
         this.servicio = servicio;
@@ -36,5 +40,23 @@ public class ReservarEvento {
     public void setServicio(String servicio) {
         this.servicio = servicio;
     }
+
+    public int getIdEvento() {
+        return idEvento;
+    }
+
+    public void setIdEvento(int idEvento) {
+        this.idEvento = idEvento;
+    }
+
+    public int getIdCliente() {
+        return idCliente;
+    }
+
+    public void setIdCliente(int idCliente) {
+        this.idCliente = idCliente;
+    }
+
+    
 
 }
