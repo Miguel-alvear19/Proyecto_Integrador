@@ -1,6 +1,7 @@
 package com.proyecto.vista;
 
 import java.awt.CardLayout;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -28,11 +29,11 @@ public class VistaPrincipalSwing extends JFrame implements ActionListener {
     // Vista de eventos con la tabla
     private VistaEventoSwing vistaEvento;
 
-    public VistaPrincipalSwing(int idClienteLogueado) {
-        initComponents(idClienteLogueado);
+    public VistaPrincipalSwing() {
+        initComponents();
     }
 
-    private void initComponents(int idClienteLogueado) {
+    private void initComponents() {
         setTitle("Sistema de Gestión de Eventos");
         setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -42,9 +43,9 @@ public class VistaPrincipalSwing extends JFrame implements ActionListener {
         panelContenedor = new JPanel(cardLayout);
 
         // Instancias de paneles
-        vistaEvento = new VistaEventoSwing(idClienteLogueado); // ahora recibe el cliente
-        JPanel panelInicio = crearPanel("Bienvenido al sistema");
-        JPanel panelInfo = crearPanel("Información del sistema");
+        vistaEvento = new VistaEventoSwing();
+        JPanel panelInicio = crearPanel("Bienvenidos al Sistema de Gestion de Eventos Mayra Ponce");
+        JPanel panelInfo = crearPanelInfo();
         JPanel panelConsultar = crearPanel("Consultar Reservas");
 
         // Agregar al contenedor
@@ -68,11 +69,44 @@ public class VistaPrincipalSwing extends JFrame implements ActionListener {
         return panel;
     }
 
+    private JPanel crearPanelInfo() {
+        JPanel panel = new JPanel(new BorderLayout());
+
+        // NORTH: título
+        JLabel lblTitulo = new JLabel("Información adicional de contacto", SwingConstants.CENTER);
+        lblTitulo.setFont(new Font("Segoe UI", Font.BOLD, 18));
+        lblTitulo.setForeground(new Color(41, 128, 185));
+        panel.add(lblTitulo, BorderLayout.NORTH);
+
+        // WEST: Instagram
+        JLabel lblInstagram = new JLabel("<html>Instagram:<br>https://www.instagram.com/mayraponceasesora</html>",
+                SwingConstants.CENTER);
+        lblInstagram.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+        lblInstagram.setForeground(Color.black);
+        panel.add(lblInstagram, BorderLayout.WEST);
+
+        // CENTER: Facebook
+        JLabel lblFacebook = new JLabel("<html>Facebook:<br>Mayra Ponce</html>", SwingConstants.CENTER);
+        lblFacebook.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+        lblFacebook.setForeground(Color.black);
+        panel.add(lblFacebook, BorderLayout.CENTER);
+
+        // EAST: TikTok
+        JLabel lblTikTok = new JLabel("<html>TikTok:<br>www.tiktok.com/@mayraponcee</html>", SwingConstants.CENTER);
+        lblTikTok.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+        lblTikTok.setForeground(Color.black);
+        panel.add(lblTikTok, BorderLayout.EAST);
+
+        return panel;
+    }
+
     private void configurarMenu() {
         JMenuBar menuBar = new JMenuBar();
 
         // Menú Archivo
         JMenu menuArchivo = new JMenu("Archivo");
+        menuArchivo.setForeground(Color.BLACK);
+        menuArchivo.setFont(new Font("Segoe UI", Font.BOLD, 12));
         menuItemInicio = new JMenuItem("Inicio");
         menuItemSalir = new JMenuItem("Salir");
         menuItemInicio.addActionListener(this);
@@ -94,12 +128,16 @@ public class VistaPrincipalSwing extends JFrame implements ActionListener {
 
         // Menú Información
         JMenu menuInfo = new JMenu("Información");
-        menuItemInfo = new JMenuItem("Acerca del sistema");
+        menuInfo.setForeground(Color.BLACK);
+        menuInfo.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        menuItemInfo = new JMenuItem("Acerca de Nosotros");
         menuItemInfo.addActionListener(this);
         menuInfo.add(menuItemInfo);
 
         // Menú Consultar
         JMenu menuConsultar = new JMenu("Consultar");
+        menuConsultar.setForeground(Color.BLACK);
+        menuConsultar.setFont(new Font("Segoe UI", Font.BOLD, 12));
         menuItemConsultar = new JMenuItem("Consultar Reservas");
         menuItemConsultar.addActionListener(this);
         menuConsultar.add(menuItemConsultar);
@@ -130,8 +168,6 @@ public class VistaPrincipalSwing extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
-        // Simulamos que el cliente logueado tiene idCliente = 1
-        int idClienteLogueado = 1;
-        SwingUtilities.invokeLater(() -> new VistaPrincipalSwing(idClienteLogueado).setVisible(true));
+        SwingUtilities.invokeLater(() -> new VistaPrincipalSwing().setVisible(true));
     }
 }
