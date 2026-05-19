@@ -28,6 +28,6 @@ public class vistaEvento {
         String telefonoContacto = sc.nextLine();
         
 
-        eventoCtrl.registrarEvento(nombreEvento, capacidadMaxima, lugarEvento, descripcion, telefonoContacto);
+        eventoCtrl.registrarEvento(0, nombreEvento, capacidadMaxima, lugarEvento, descripcion, telefonoContacto);
     }
 }
