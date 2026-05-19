@@ -15,10 +15,8 @@ public class VistaEventoSwing extends JPanel implements ActionListener {
     private JButton btnRegistrar;
     private JButton btnReservar;
     private DefaultTableModel modelo;
-    private int idCliente; 
 
-    public VistaEventoSwing(int idCliente) {
-        this.idCliente = idCliente;
+    public VistaEventoSwing() {
         initComponents();
         cargarEventos();
     }
@@ -26,14 +24,13 @@ public class VistaEventoSwing extends JPanel implements ActionListener {
     private void initComponents() {
         setLayout(new BorderLayout());
 
-        String[] columnas = {"ID", "Nombre", "Lugar", "Capacidad", "Descripción", "Teléfono"};
+        String[] columnas = { "ID", "Nombre", "Lugar", "Capacidad", "Descripción", "Teléfono" };
         modelo = new DefaultTableModel(columnas, 0);
         tablaEventos = new JTable(modelo);
 
         // Ocultar la columna ID
         tablaEventos.getColumnModel().getColumn(0).setMinWidth(0);
         tablaEventos.getColumnModel().getColumn(0).setMaxWidth(0);
-
         JScrollPane scrollPane = new JScrollPane(tablaEventos);
 
         JPanel panelBotones = new JPanel();
@@ -56,13 +53,13 @@ public class VistaEventoSwing extends JPanel implements ActionListener {
         List<RegistrarEvento> lista = dao.listarEventos();
 
         for (RegistrarEvento ev : lista) {
-            modelo.addRow(new Object[]{
-                ev.getIdEvento(), // cargamos el ID oculto
-                ev.getNombreEvento(),
-                ev.getLugarEvento(),
-                ev.getCapacidadMaxima(),
-                ev.getDescripcion(),
-                ev.getTelefonoContacto()
+            modelo.addRow(new Object[] {
+                    ev.getIdEvento(), 
+                    ev.getNombreEvento(),
+                    ev.getLugarEvento(),
+                    ev.getCapacidadMaxima(),
+                    ev.getDescripcion(),
+                    ev.getTelefonoContacto()
             });
         }
     }
@@ -88,7 +85,7 @@ public class VistaEventoSwing extends JPanel implements ActionListener {
         try {
             int capacidad = Integer.parseInt(capacidadStr);
 
-            RegistrarEvento nuevo = new RegistrarEvento(telefono, capacidad, telefono, telefono, telefono);
+            RegistrarEvento nuevo = new RegistrarEvento(0, nombre, capacidad, lugar, descripcion, telefono);
             nuevo.setNombreEvento(nombre);
             nuevo.setLugarEvento(lugar);
             nuevo.setCapacidadMaxima(capacidad);
@@ -110,19 +107,28 @@ public class VistaEventoSwing extends JPanel implements ActionListener {
     private void reservarEvento() {
         int fila = tablaEventos.getSelectedRow();
         if (fila != -1) {
-            int idEvento = (int) tablaEventos.getValueAt(fila, 0); // usamos el ID oculto
+            
+            int idEvento = (int) tablaEventos.getValueAt(fila, 0);
 
+            
+            String idClienteStr = JOptionPane.showInputDialog(this, "Ingrese su ID de cliente:");
             String fecha = JOptionPane.showInputDialog(this, "Ingrese fecha (YYYY-MM-DD):");
             String hora = JOptionPane.showInputDialog(this, "Ingrese hora (HH:MM):");
             String servicio = JOptionPane.showInputDialog(this, "Ingrese tipo de servicio:");
 
-            ReservaDao reservaDao = new ReservaDao();
-            boolean ok = reservaDao.reservarEvento(idEvento, idCliente, fecha, hora, servicio);
+            try {
+                int idCliente = Integer.parseInt(idClienteStr);
 
-            if (ok) {
-                JOptionPane.showMessageDialog(this, "✅ Reserva realizada con éxito");
-            } else {
-                JOptionPane.showMessageDialog(this, "❌ No se pudo realizar la reserva");
+                ReservaDao reservaDao = new ReservaDao();
+                boolean ok = reservaDao.reservarEvento(idEvento, idCliente, fecha, hora, servicio);
+
+                if (ok) {
+                    JOptionPane.showMessageDialog(this, "✅ Reserva realizada con éxito");
+                } else {
+                    JOptionPane.showMessageDialog(this, "❌ No se pudo realizar la reserva");
+                }
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(this, "El ID de cliente debe ser un número válido");
             }
         } else {
             JOptionPane.showMessageDialog(this, "Seleccione un evento de la tabla para reservar");
