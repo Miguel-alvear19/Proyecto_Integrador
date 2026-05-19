@@ -78,8 +78,8 @@ public class VistaLoginSwing extends JFrame implements ActionListener {
             }
         } else if (fuente == btnRegistrar) {
             // Aquí puedes abrir tu formulario de registro
-            JOptionPane.showMessageDialog(this, "Abrir ventana de registro...");
-            // new VistaRegistroSwing().setVisible(true);
+            JOptionPane.showMessageDialog(this, " Redirigiendo a registro...");
+            new VistaRegistroSwing().setVisible(true);
         }
     }
 
