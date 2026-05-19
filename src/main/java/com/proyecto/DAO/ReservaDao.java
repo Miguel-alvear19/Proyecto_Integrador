@@ -11,13 +11,13 @@ public class ReservaDao {
     public boolean reservarEvento(int idEvento, int idCliente, String fechaReserva, String horaReserva, String servicio) {
         try (Connection conn = ConexionMySQLDatabase.getConnection()) {
 
-            // 1. Validar disponibilidad con la clase Disponibilidad
+            
             if (!Disponibilidad.validarDisponibilidad(idEvento, fechaReserva, horaReserva)) {
                 System.out.println("❌ No se puede reservar: la fecha/hora ingresada ya pasó.");
                 return false;
             }
 
-            // 2. Insertar la reserva en la tabla
+            
             String sqlInsert = "INSERT INTO reservas (idEvento, idCliente, fechaReserva, horaReserva, servicio) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement psInsert = conn.prepareStatement(sqlInsert);
             psInsert.setInt(1, idEvento);
