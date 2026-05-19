@@ -3,8 +3,8 @@ package com.proyecto.modelo;
 
 public class ReservarEvento {
 
-    private int idEvento; // ID del evento
-    private int idCliente; // ID del cliente que reserva
+    private int idEvento; 
+    private int idCliente; 
     private String fechaReserva;
     private String horaReserva;
     private String servicio;
