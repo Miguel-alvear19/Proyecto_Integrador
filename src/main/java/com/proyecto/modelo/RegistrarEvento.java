@@ -2,15 +2,16 @@ package com.proyecto.modelo;
 
 public class RegistrarEvento {
 
-    private int idEvento; // ID del evento
+    private int idEvento;
     private String nombreEvento;
     private int capacidadMaxima;
     private String lugarEvento;
     private String descripcion;
     private String telefonoContacto;
 
-    public RegistrarEvento(String nombreEvento, int capacidadMaxima, String lugarEvento, String descripcion,
+    public RegistrarEvento(int idEvento, String nombreEvento, int capacidadMaxima, String lugarEvento, String descripcion,
             String telefonoContacto2) {
+        this.idEvento = idEvento;
         this.nombreEvento = nombreEvento;
         this.capacidadMaxima = capacidadMaxima;
         this.lugarEvento = lugarEvento;
